@@ -1,15 +1,15 @@
 <template>
   <div>
-    <ShowsList />
+    <Movies />
   </div>
 </template>
 
 <script>
-import ShowsList from './components/ShowsList.vue';
+import MoviesContent from "./components/MoviesContent.vue";
 
 export default {
   components: {
-    ShowsList,
+    MoviesContent,
   },
 };
 </script>
