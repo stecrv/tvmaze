@@ -4,28 +4,26 @@
       <li
           v-for="movie in filteredMovies"
           :key="movie.id">
-        {{ movie.name }}
+        <span>{{ movie.name }}</span>
+        <div><img :src="movie.image.medium" :alt="movie.name"></div>
       </li>
     </ul>
   </div>
 </template>
 
-<script>
+<script setup>
+import { computed, defineProps } from 'vue';
 
-export default {
-  props: {
-    selectedGenres: String,
-    movies: Array,
-  },
-  computed: {
-    filteredMovies() {
-      return this.selectedGenres.length === 0
-          ? this.movies
-          : this.movies.filter((movie) =>
-              movie.genres.includes(this.selectedGenres)
-          );
-    },
-  },
-};
+const props = defineProps({
+  selectedGenres: String,
+  movies: Array,
+});
+
+const filteredMovies = computed(() => {
+  return props.selectedGenres.length === 0
+      ? props.movies
+      : props.movies.filter((movie) =>
+          movie.genres.includes(props.selectedGenres)
+      );
+});
 </script>
-
