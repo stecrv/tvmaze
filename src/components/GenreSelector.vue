@@ -1,5 +1,4 @@
 <template>
-  <div>
     <select
         :value="selectedGenre"
         @change="updateGenre">
@@ -12,7 +11,6 @@
         {{ genre }}
       </option>
     </select>
-  </div>
 </template>
 
 <script setup>
@@ -36,3 +34,7 @@ watch(() => props.selectedGenre, (newGenre) => {
   selectedGenre.value = newGenre;
 });
 </script>
+
+<style scoped>
+
+</style>

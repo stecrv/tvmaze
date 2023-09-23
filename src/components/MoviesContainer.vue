@@ -1,13 +1,18 @@
 <template>
-  <div>
-    <genre-selector
-        :genres="genres"
-        :selected-genre="selectedGenres"
-        @update:selectedGenre="selectedGenres = $event" />
-    <movie-list
-        :selectedGenres="selectedGenres"
-        :movies="movies" />
-  </div>
+  <main id="container">
+    <section id="genre-selector" >
+      <h1>Movie Selector</h1>
+      <genre-selector
+          :genres="genres"
+          :selected-genre="selectedGenres"
+          @update:selectedGenre="selectedGenres = $event" />
+    </section>
+    <section id="movie-list" >
+      <movie-list
+          :selectedGenres="selectedGenres"
+          :movies="movies" />
+    </section>
+  </main>
 </template>
 
 <script setup>
@@ -29,3 +34,16 @@ const genres = computed(() => {
   return [...new Set(allGenres)].sort();
 });
 </script>
+
+<style scoped>
+#genre-selector {
+  font-size: 1.2em;
+  padding: 1em 3em;
+  height: 20vh;
+}
+
+#genre-selector  h1 {
+  font-size: 1em;
+  font-weight: normal;
+}
+</style>

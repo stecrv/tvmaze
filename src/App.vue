@@ -1,7 +1,5 @@
 <template>
-  <div>
     <MoviesContainer />
-  </div>
 </template>
 
 <script>

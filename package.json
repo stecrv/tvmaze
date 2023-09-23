@@ -9,8 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "pinia": "^2.1.6",
-    "vue": "^3.2.47"
+    "vue": "^3.2.47",
+    "normalize.css": "^8.0.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.1.0",
