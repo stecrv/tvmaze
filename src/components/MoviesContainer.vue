@@ -1,15 +1,10 @@
 <template>
-  <main id="container">
-    <section id="genre-selector" >
-      <h1>Movie Selector</h1>
-      <genre-selector
-          :genres="genres"
-          :selected-genre="selectedGenres"
-          @update:selectedGenre="selectedGenres = $event" />
-    </section>
-    <section id="movie-list" >
+  <main class="container">
+    <h1>Movie list</h1>
+    <section class="movie-list" >
       <movie-list
-          :selectedGenres="selectedGenres"
+          v-for="genre in genres"
+          :selectedGenres="genre"
           :movies="movies" />
     </section>
   </main>
@@ -36,14 +31,8 @@ const genres = computed(() => {
 </script>
 
 <style scoped>
-#genre-selector {
-  font-size: 1.2em;
-  padding: 1em 3em;
-  height: 20vh;
-}
-
-#genre-selector  h1 {
-  font-size: 1em;
-  font-weight: normal;
+.container{
+ padding: 10px;
+  margin: 10px;
 }
 </style>
