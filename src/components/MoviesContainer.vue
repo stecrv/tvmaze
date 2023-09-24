@@ -2,12 +2,20 @@
 <template>
   <div class="container">
     <h1>Movie search</h1>
+    <div v-if="loading.value">
+      Loading data..
+    </div>
+    <div v-else-if="showError">
+      Sorry, the app is not working, reload the page
+    </div>
+    <div v-else>
     <SearchInput :searchQuery="searchQuery"
                  @update:searchQuery="updateSearchQuery"/>
     <MovieList :movies="moviesFiltered"
                v-for="genre in genres"
                :selectedGenres="genre"
                />
+    </div>
   </div>
 </template>
 
@@ -15,16 +23,25 @@
 import { ref, onMounted, computed, watch } from 'vue';
 import SearchInput from './SearchInput.vue';
 import MovieList from "./MovieList.vue";
+import { dataFetch } from "../helpers/api.js";
+import { dataEnricher } from "../helpers/functions.js";
 
 const movies = ref([]);
 const moviesFiltered = ref([]);
 const searchQuery = ref('');
+const loading = ref(false);
+const showError =  ref(false);
 
 onMounted(async () => {
-  const response = await fetch('https://api.tvmaze.com/shows');
-  const data = await response.json();
-  movies.value = moviesFiltered.value = data.map(el => {
-    return {...el, abstract: el.summary.substring(0, 200) + "..."}});
+  loading.value=true;
+  try {
+    const data = await dataFetch()
+    movies.value = moviesFiltered.value = dataEnricher(data)
+    loading.value=false;
+  }catch(error){
+    showError.value=true;
+    loading.value=false;
+  }
 });
 
 const genres = computed(() => {

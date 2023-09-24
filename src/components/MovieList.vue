@@ -1,5 +1,5 @@
 <template>
-  <h2>{{ selectedGenres }}</h2>
+  <h2 v-if="filteredMovies.length>0">{{ selectedGenres }}</h2>
   <section class="movie-container articles">
     <article class="movie-element"
              v-for="movie in filteredMovies"
