@@ -1,32 +1,48 @@
+<!-- MovieList.vue -->
 <template>
-  <main class="container">
-    <h1>Movie list</h1>
-    <section class="movie-list" >
-      <movie-list
-          v-for="genre in genres"
-          :selectedGenres="genre"
-          :movies="movies" />
-    </section>
-  </main>
+  <div class="container">
+    <h1>Movie search</h1>
+    <SearchInput :searchQuery="searchQuery"
+                 @update:searchQuery="updateSearchQuery"/>
+    <MovieList :movies="moviesFiltered"
+               v-for="genre in genres"
+               :selectedGenres="genre"
+               />
+  </div>
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue';
-import GenreSelector from './GenreSelector.vue';
-import MovieList from './MovieList.vue';
+import { ref, onMounted, computed, watch } from 'vue';
+import SearchInput from './SearchInput.vue';
+import MovieList from "./MovieList.vue";
 
 const movies = ref([]);
-const selectedGenres = ref('');
+const moviesFiltered = ref([]);
+const searchQuery = ref('');
 
 onMounted(async () => {
   const response = await fetch('https://api.tvmaze.com/shows');
   const data = await response.json();
-  movies.value = data;
+  movies.value = moviesFiltered.value = data.map(el => {
+    return {...el, abstract: el.summary.substring(0, 200) + "..."}});
 });
 
 const genres = computed(() => {
   const allGenres = movies.value.flatMap((movie) => movie.genres);
   return [...new Set(allGenres)].sort();
+});
+
+const updateSearchQuery = (newSearchQuery) => {
+  searchQuery.value = newSearchQuery;
+};
+
+watch(searchQuery, () => {
+  searchQuery.value ?
+    moviesFiltered.value = movies.value.filter(movie => {
+      return movie.name.toLowerCase().includes(searchQuery.value.toLowerCase());
+    })
+  : moviesFiltered.value = movies.value
+
 });
 </script>
 

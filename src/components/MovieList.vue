@@ -5,10 +5,8 @@
              v-for="movie in filteredMovies"
              :key="movie.id">
       <div class="movie-card__wrapper article-wrapper">
-        <figure class="movie-card">
-          <div class="movie-card__hero">
+        <figure class="movie-card__figure">
             <img :src="movie.image.original" :alt="movie.name" class="movie-card__image">
-          </div>
         </figure>
         <div class="movie-card__content article-body">
           <h2 class="movie-card__heading">
@@ -38,16 +36,12 @@ const props = defineProps({
 });
 
 const filteredMovies = computed(() => {
-  let moviesFiltered = props.selectedGenres.length === 0
+  return props.selectedGenres.length === 0
       ? props.movies
       : props.movies.filter((movie) =>
           movie.genres.includes(props.selectedGenres)
       );
-  return moviesFiltered.map(el => {
-    return {...el, abstract: el.summary.substring(0, 200) + "..."}
   });
-
-});
 </script>
 
 <style scoped>
@@ -133,7 +127,6 @@ article:has(:hover, :focus) {
   display: grid;
   max-width: 12000px;
   margin-inline: auto;
-  padding-inline: 24px;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 24px;
 }
