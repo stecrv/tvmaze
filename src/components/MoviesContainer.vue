@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed, watch } from 'vue';
+import {ref, onBeforeMount, computed, watch} from 'vue';
 import SearchInput from './SearchInput.vue';
 import MovieList from "./MovieList.vue";
 import { dataFetch } from "../helpers/api.js";
@@ -32,7 +32,7 @@ const searchQuery = ref('');
 const loading = ref(false);
 const showError =  ref(false);
 
-onMounted(async () => {
+onBeforeMount(async () => {
   loading.value=true;
   try {
     const data = await dataFetch()

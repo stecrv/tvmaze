@@ -13,7 +13,7 @@
             {{ movie.name }}
           </h2>
           <p v-html="movie.abstract" class="movie-card__description"></p>
-          <a href="#" class="read-more">
+          <a :href="'/movie/'+movie.id" class="read-more">
             Read more <span class="sr-only">about this is some title</span>
             <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd"
@@ -29,6 +29,7 @@
 
 <script setup>
 import {computed, defineProps} from 'vue';
+import { useRouter } from 'vue-router';
 
 const props = defineProps({
   selectedGenres: String,
@@ -59,7 +60,7 @@ article {
   overflow: hidden;
 }
 
-article a::after {
+article .link::after {
   position: absolute;
   inset-block: 0;
   inset-inline: 0;

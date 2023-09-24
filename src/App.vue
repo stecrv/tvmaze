@@ -1,13 +1,3 @@
 <template>
-    <MoviesContainer />
+  <router-view></router-view>
 </template>
-
-<script>
-import MoviesContainer from "./components/MoviesContainer.vue";
-
-export default {
-  components: {
-    MoviesContainer,
-  },
-};
-</script>
