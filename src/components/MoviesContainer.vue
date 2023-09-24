@@ -9,12 +9,29 @@
       Sorry, the app is not working, reload the page
     </div>
     <div v-else>
-    <SearchInput :searchQuery="searchQuery"
-                 @update:searchQuery="updateSearchQuery"/>
-    <MovieList :movies="moviesFiltered"
-               v-for="genre in genres"
-               :selectedGenres="genre"
-               />
+      <div class="search-bar">
+        <div class="search-bar__item">
+          <SearchInput :searchQuery="searchQuery"
+                       @update:searchQuery="updateSearchQuery"/>
+        </div>
+        <div class="search-bar__item">
+          <genre-selector
+              :genres="genres"
+              :selected-genre="selectedGenres"
+              @update:selectedGenre="selectedGenres = $event"/>
+        </div>
+      </div>
+      <div class="result-container">
+        <MovieList :movies="moviesFiltered"
+                   v-if="!selectedGenres"
+                   v-for="genre in genres"
+                   :selectedGenres="genre"
+        />
+        <MovieList :movies="moviesFiltered"
+                   v-else
+                   :selectedGenres="selectedGenres"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -23,24 +40,26 @@
 import {ref, onBeforeMount, computed, watch} from 'vue';
 import SearchInput from './SearchInput.vue';
 import MovieList from "./MovieList.vue";
-import { dataFetch } from "../helpers/api.js";
-import { dataEnricher } from "../helpers/functions.js";
+import GenreSelector from "./GenreSelector.vue";
+import {dataFetch} from "../helpers/api.js";
+import {dataEnricher} from "../helpers/functions.js";
 
 const movies = ref([]);
 const moviesFiltered = ref([]);
 const searchQuery = ref('');
 const loading = ref(false);
-const showError =  ref(false);
+const showError = ref(false);
+const selectedGenres = ref('')
 
 onBeforeMount(async () => {
-  loading.value=true;
+  loading.value = true;
   try {
     const data = await dataFetch()
     movies.value = moviesFiltered.value = dataEnricher(data)
-    loading.value=false;
-  }catch(error){
-    showError.value=true;
-    loading.value=false;
+    loading.value = false;
+  } catch (error) {
+    showError.value = true;
+    loading.value = false;
   }
 });
 
@@ -55,17 +74,21 @@ const updateSearchQuery = (newSearchQuery) => {
 
 watch(searchQuery, () => {
   searchQuery.value ?
-    moviesFiltered.value = movies.value.filter(movie => {
-      return movie.name.toLowerCase().includes(searchQuery.value.toLowerCase());
-    })
-  : moviesFiltered.value = movies.value
-
+      moviesFiltered.value = movies.value.filter(movie => {
+        return movie.name.toLowerCase().includes(searchQuery.value.toLowerCase());
+      })
+      : moviesFiltered.value = movies.value
 });
 </script>
 
 <style scoped>
-.container{
- padding: 10px;
+.container {
+  padding: 10px;
   margin: 10px;
 }
+.search-bar{
+  display: flex;
+  flex-direction: row;
+}
+
 </style>

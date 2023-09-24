@@ -29,7 +29,6 @@
 
 <script setup>
 import {computed, defineProps} from 'vue';
-import { useRouter } from 'vue-router';
 
 const props = defineProps({
   selectedGenres: String,

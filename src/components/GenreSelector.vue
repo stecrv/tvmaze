@@ -3,7 +3,7 @@
         :value="selectedGenre"
         @change="updateGenre">
       <option value="">
-        All
+        All genres
       </option>
       <option
           v-for="genre in genres"
