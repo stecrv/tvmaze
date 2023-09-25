@@ -14,7 +14,7 @@
           </h2>
           <p v-html="movie.abstract" class="movie-card__description"></p>
           <a :href="'/movie/'+movie.id" class="read-more">
-            Read more <span class="sr-only">about this is some title</span>
+            Read more <span class="sr-only">about this</span>
             <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd"
                     d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
@@ -45,7 +45,7 @@ const filteredMovies = computed(() => {
 </script>
 
 <style scoped>
-article {
+.movie-element {
   --img-scale: 1.001;
   --title-color: black;
   --link-icon-translate: -20px;
@@ -59,15 +59,7 @@ article {
   overflow: hidden;
 }
 
-article .link::after {
-  position: absolute;
-  inset-block: 0;
-  inset-inline: 0;
-  cursor: pointer;
-  content: "";
-}
-
-article h2 {
+.movie-element h2 {
   margin: 0 0 18px 0;
   font-family: "Bebas Neue", cursive;
   font-size: 1.9rem;
@@ -76,14 +68,14 @@ article h2 {
   transition: color 0.3s ease-out;
 }
 
-figure {
+.movie-card__figure {
   margin: 0;
   padding: 0;
   aspect-ratio: 16 / 9;
   overflow: hidden;
 }
 
-article img {
+.movie-element img {
   max-width: 100%;
   transform-origin: center;
   transform: scale(var(--img-scale));
@@ -94,18 +86,18 @@ article img {
   padding: 24px;
 }
 
-article a {
+.movie-element a {
   display: inline-flex;
   align-items: center;
   text-decoration: none;
   color: #28666e;
 }
 
-article a:focus {
+.movie-element a:focus {
   outline: 1px dotted #28666e;
 }
 
-article a .icon {
+.movie-element a .icon {
   min-width: 24px;
   width: 24px;
   height: 24px;
@@ -115,7 +107,7 @@ article a .icon {
   transition: all 0.3s;
 }
 
-article:has(:hover, :focus) {
+.movie-element:has(:hover, :focus) {
   --img-scale: 1.1;
   --title-color: #28666e;
   --link-icon-translate: 0;
@@ -132,7 +124,7 @@ article:has(:hover, :focus) {
 }
 
 @media screen and (max-width: 960px) {
-  article {
+  .movie-element {
     container: card/inline-size;
   }
 
@@ -152,13 +144,13 @@ article:has(:hover, :focus) {
     padding-left: 0;
   }
 
-  figure {
+  .movie-card__figure {
     width: 100%;
     height: 100%;
     overflow: hidden;
   }
 
-  figure img {
+  .movie-card__figure img {
     height: 100%;
     aspect-ratio: 1;
     object-fit: cover;
