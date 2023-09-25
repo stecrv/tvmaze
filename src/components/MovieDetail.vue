@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h2>Movie Details</h2>
-    <div v-if="loading.value">
+    <div v-if="loading">
       Loading data..
     </div>
     <div v-else-if="showError">
