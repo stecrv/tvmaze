@@ -1,17 +1,17 @@
 <template>
   <div class="container">
     <h2>Movie Details</h2>
-    <div v-if="loading">
+    <div v-if="fetch.load">
       Loading data..
     </div>
-    <div v-else-if="showError">
+    <div v-else-if="fetch.error">
       Sorry, the app is not working, reload the page
     </div>
     <div v-else>
       <div class="movie-details">
-        <h3>{{ movie.name }}</h3>
-        <img :src="movie.image.medium" :alt="movie.name" />
-        <p v-html="movie.summary" />
+        <h3>{{ fetch.data.name }}</h3>
+        <img :src="fetch.data.image.medium" :alt="fetch.data.name" />
+        <p v-html="fetch.data.summary" />
       </div>
     </div>
     <div>
@@ -23,30 +23,16 @@
 </template>
 
 <script setup>
-import {ref, computed, onBeforeMount} from 'vue';
+import {computed, reactive} from 'vue';
 import { useRoute } from 'vue-router';
-import { dataMovieFetch } from "../helpers/api.js";
+import {useFetch} from "../compositions/fetch.js";
 
 
 const route = useRoute();
 
-const movie = ref(null);
-const loading = ref(false);
-const showError = ref(false);
-
 const movieId = computed(() => route.params.id);
 
-onBeforeMount(async () => {
-  loading.value=true;
-  try {
-    const data = await dataMovieFetch(movieId.value)
-    movie.value = data;
-    loading.value=false;
-  }catch(error){
-    showError.value=true;
-    loading.value=false;
-  }
-});
+const fetch = reactive(useFetch(`shows/${movieId.value}`));
 
 </script>
 

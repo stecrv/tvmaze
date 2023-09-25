@@ -2,10 +2,10 @@
 <template>
   <div class="container">
     <h1>Movie search</h1>
-    <div v-if="loading">
+    <div v-if="fetch.load">
       Loading data..
     </div>
-    <div v-else-if="showError">
+    <div v-else-if="fetch.error">
       Sorry, the app is not working, reload the page
     </div>
     <div v-else>
@@ -40,30 +40,21 @@
 </template>
 
 <script setup>
-import {ref, onBeforeMount, computed, watch} from 'vue';
+import {ref, computed, watch, reactive} from 'vue';
 import SearchInput from './SearchInput.vue';
 import MovieList from "./MovieList.vue";
 import GenreSelector from "./GenreSelector.vue";
-import {dataFetch} from "../helpers/api.js";
 import {dataEnricher} from "../helpers/functions.js";
+import {useFetch} from "../compositions/fetch.js";
 
-const movies = ref([]);
 const moviesFiltered = ref([]);
 const searchQuery = ref('');
-const loading = ref(false);
-const showError = ref(false);
 const selectedGenres = ref('')
 
-onBeforeMount(async () => {
-  loading.value = true;
-  try {
-    const data = await dataFetch()
-    movies.value = moviesFiltered.value = dataEnricher(data)
-    loading.value = false;
-  } catch (error) {
-    showError.value = true;
-    loading.value = false;
-  }
+const fetch = reactive(useFetch('shows'));
+
+const movies = computed(() => {
+  return fetch.data ? dataEnricher(fetch.data) : []
 });
 
 const genres = computed(() => {
@@ -75,13 +66,14 @@ const updateSearchQuery = (newSearchQuery) => {
   searchQuery.value = newSearchQuery;
 };
 
-watch(searchQuery, () => {
+watch([searchQuery, movies], () => {
   searchQuery.value ?
       moviesFiltered.value = movies.value.filter(movie => {
         return movie.name.toLowerCase().includes(searchQuery.value.toLowerCase());
       })
       : moviesFiltered.value = movies.value
 });
+
 </script>
 
 <style scoped>
@@ -92,7 +84,7 @@ watch(searchQuery, () => {
 .search-bar{
   display: flex;
   flex-direction: row;
-  gap: 10px
+  gap: 0 10px
 }
 .result-empty{
   margin: 10px 0;
