@@ -2,7 +2,7 @@
 <template>
   <div class="container">
     <h1>Movie search</h1>
-    <div v-if="loading.value">
+    <div v-if="loading">
       Loading data..
     </div>
     <div v-else-if="showError">

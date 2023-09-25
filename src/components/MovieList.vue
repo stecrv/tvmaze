@@ -67,7 +67,6 @@ const filteredMovies = computed(() => {
 
 .movie-element h2 {
   margin: 0 0 18px 0;
-  font-family: "Bebas Neue", cursive;
   font-size: 1.9rem;
   letter-spacing: 0.06em;
   color: var(--title-color);
