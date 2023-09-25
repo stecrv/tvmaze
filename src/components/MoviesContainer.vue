@@ -92,6 +92,7 @@ watch(searchQuery, () => {
 .search-bar{
   display: flex;
   flex-direction: row;
+  gap: 10px
 }
 .result-empty{
   margin: 10px 0;

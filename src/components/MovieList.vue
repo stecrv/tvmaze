@@ -1,4 +1,5 @@
 <template>
+  <div class="movie-wrapper">
   <h2 v-if="filteredMovies.length>0">{{ selectedGenres }}</h2>
   <section class="movie-container articles">
     <article class="movie-element"
@@ -25,6 +26,7 @@
       </div>
     </article>
   </section>
+  </div>
 </template>
 
 <script setup>
@@ -45,6 +47,10 @@ const filteredMovies = computed(() => {
 </script>
 
 <style scoped>
+:root {
+  --gutter: 20px;
+}
+
 .movie-element {
   --img-scale: 1.001;
   --title-color: black;
@@ -117,10 +123,18 @@ const filteredMovies = computed(() => {
 
 .movie-container {
   display: grid;
-  max-width: 12000px;
-  margin-inline: auto;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 300px));
+  grid-auto-flow: column;
   gap: 24px;
+  margin-inline: auto;
+  overflow-x: scroll;
+  scroll-snap-type: x proximity;
+  padding-bottom: calc(.75 * var(--gutter));
+  margin-bottom: calc(-.25 * var(--gutter));
+}
+
+.movie-wrapper{
+  width: 1000vw;
 }
 
 @media screen and (max-width: 960px) {
