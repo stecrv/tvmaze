@@ -22,6 +22,9 @@
         </div>
       </div>
       <div class="result-container">
+        <div v-if="moviesFiltered.length===0">
+          <div class="result-empty">Sorry, no movies available.</div>
+        </div>
         <MovieList :movies="moviesFiltered"
                    v-if="!selectedGenres"
                    v-for="genre in genres"
@@ -89,6 +92,9 @@ watch(searchQuery, () => {
 .search-bar{
   display: flex;
   flex-direction: row;
+}
+.result-empty{
+  margin: 10px 0;
 }
 
 </style>
