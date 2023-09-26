@@ -151,9 +151,6 @@ const filteredMovies = computed(() => {
 }
 
 @media screen and (max-width: 960px) {
-  .movie-list__element {
-    container: card/inline-size;
-  }
 
   .movie-list__row {
     grid-template-rows: auto;
