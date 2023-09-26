@@ -1,7 +1,7 @@
 <!-- MovieList.vue -->
 <template>
   <div class="container-list">
-    <h1>FilmFinder</h1>
+    <h1>MovieFinder</h1>
     <div v-if="fetch.load">
       Loading data..
     </div>

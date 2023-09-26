@@ -1,6 +1,6 @@
 <template>
   <div class="movie-details__container container">    
-    <h1>FilmFinder</h1>
+    <h1>MovieFinder</h1>
     <div v-if="fetch.load" class="loading-message">
       Loading data..
     </div>
