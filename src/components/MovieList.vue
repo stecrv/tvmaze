@@ -117,12 +117,12 @@ const filteredMovies = computed(() => {
   --title-color: #28666e;
   --link-icon-translate: 0;
   --link-icon-opacity: 1;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
 .movie-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 300px));
+  grid-template-rows: 600px;
   grid-auto-flow: column;
   gap: 24px;
   margin-inline: auto;
@@ -139,6 +139,10 @@ const filteredMovies = computed(() => {
 @media screen and (max-width: 960px) {
   .movie-element {
     container: card/inline-size;
+  }
+  
+  .movie-container {
+    grid-template-rows: auto;
   }
 
   .article-body p {
@@ -168,6 +172,7 @@ const filteredMovies = computed(() => {
     aspect-ratio: 1;
     object-fit: cover;
   }
+  
 }
 
 .sr-only:not(:focus):not(:active) {
