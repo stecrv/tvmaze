@@ -45,7 +45,7 @@ import SearchInput from './SearchInput.vue';
 import MovieList from "./MovieList.vue";
 import GenreSelector from "./GenreSelector.vue";
 import {dataEnricher} from "../helpers/functions.js";
-import {useFetch} from "../compositions/fetch.js";
+import {useFetch} from "../composables/useFetch.js";
 
 const moviesFiltered = ref([]);
 const searchQuery = ref('');
