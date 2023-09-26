@@ -80,6 +80,10 @@ const filteredMovies = computed(() => {
   overflow: hidden;
 }
 
+.movie-list__card__heading {
+  white-space: nowrap;
+}
+
 .movie-list__element img {
   max-width: 100%;
   transform-origin: center;
@@ -143,6 +147,7 @@ const filteredMovies = computed(() => {
 }
 
 .movie-list__info{
+  width: 200px;
 }
 
 @media screen and (max-width: 960px) {
@@ -160,34 +165,11 @@ const filteredMovies = computed(() => {
 
   .movie-list__card__content {
     display: grid;
-    grid-template-rows: [title] 50px [content] 0px [cta] 50px;
+    grid-template-rows: [title] 75px [content] 0px [cta] 50px;
   }
 }
 
-@container card (min-width: 380px) {
-  .movie-list__card__wrapper {
-    display: grid;
-    grid-template-columns: 100px 1fr;
-    gap: 16px;
-  }
 
-  .movie-list__card__content {
-    padding-left: 0;
-  }
-
-  .movie-list__card-figure {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-  }
-
-  .movie-list__card-figure img {
-    height: 100%;
-    aspect-ratio: 1;
-    object-fit: cover;
-  }
-  
-}
 
 .read-more{
   color: #fff

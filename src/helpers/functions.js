@@ -1,6 +1,6 @@
  export const dataEnricher = data => {
     return data.map(el => {
-        return {...el, abstract: el.summary.substring(0, 200) + "..."}});
+        return {...el, abstract: el.summary.substring(0, 160) + "..."}});
  }
 
  export const dataMovieEnricher = movie =>{
