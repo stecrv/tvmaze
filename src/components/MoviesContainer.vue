@@ -1,6 +1,6 @@
 <!-- MovieList.vue -->
 <template>
-  <div class="container">
+  <div class="container-list">
     <h1>Movie search</h1>
     <div v-if="fetch.load">
       Loading data..
@@ -77,7 +77,7 @@ watch([searchQuery, movies], () => {
 </script>
 
 <style scoped>
-.container {
+.container-list {
   padding: 10px;
   margin: 10px;
 }

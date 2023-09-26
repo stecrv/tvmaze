@@ -1,19 +1,19 @@
 <template>
-  <div class="movie-wrapper">
-  <h2 v-if="filteredMovies.length>0">{{ selectedGenres }}</h2>
-  <section class="movie-container articles">
-    <article class="movie-element"
+  <div class="movie-list__wrapper" v-if="filteredMovies.length>0">
+  <h4>{{ selectedGenres }}</h4>
+  <section class="movie-list__row">
+    <article class="movie-list__element"
              v-for="movie in filteredMovies"
              :key="movie.id">
-      <div class="movie-card__wrapper article-wrapper">
-        <figure class="movie-card__figure">
-            <img :src="movie.image.original" :alt="movie.name" class="movie-card__image">
+      <div class="movie-list__card__wrapper article-wrapper">
+        <figure class="movie-list__card-figure">
+            <img :src="movie.image.original" :alt="movie.name" class="movie-list__card__image">
         </figure>
-        <div class="movie-card__content article-body">
-          <h2 class="movie-card__heading">
+        <div class="movie-list__card__content article-body">
+          <h2 class="movie-list__card__heading">
             {{ movie.name }}
           </h2>
-          <p v-html="movie.abstract" class="movie-card__description"></p>
+          <p v-html="movie.abstract" class="movie-list__card__description"></p>
           <a :href="'/movie/'+movie.id" class="read-more">
             Read more <span class="sr-only">about this</span>
             <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
@@ -51,7 +51,7 @@ const filteredMovies = computed(() => {
   --gutter: 20px;
 }
 
-.movie-element {
+.movie-list__element {
   --img-scale: 1.001;
   --title-color: black;
   --link-icon-translate: -20px;
@@ -65,7 +65,7 @@ const filteredMovies = computed(() => {
   overflow: hidden;
 }
 
-.movie-element h2 {
+.movie-list__element h2 {
   margin: 0 0 18px 0;
   font-size: 1.9rem;
   letter-spacing: 0.06em;
@@ -73,14 +73,14 @@ const filteredMovies = computed(() => {
   transition: color 0.3s ease-out;
 }
 
-.movie-card__figure {
+.movie-list__card-figure {
   margin: 0;
   padding: 0;
   aspect-ratio: 16 / 9;
   overflow: hidden;
 }
 
-.movie-element img {
+.movie-list__element img {
   max-width: 100%;
   transform-origin: center;
   transform: scale(var(--img-scale));
@@ -91,18 +91,18 @@ const filteredMovies = computed(() => {
   padding: 24px;
 }
 
-.movie-element a {
+.movie-list__element a {
   display: inline-flex;
   align-items: center;
   text-decoration: none;
   color: #28666e;
 }
 
-.movie-element a:focus {
+.movie-list__element a:focus {
   outline: 1px dotted #28666e;
 }
 
-.movie-element a .icon {
+.movie-list__element a .icon {
   min-width: 24px;
   width: 24px;
   height: 24px;
@@ -112,17 +112,17 @@ const filteredMovies = computed(() => {
   transition: all 0.3s;
 }
 
-.movie-element:has(:hover, :focus) {
+.movie-list__element:has(:hover, :focus) {
   --img-scale: 1.1;
   --title-color: #28666e;
   --link-icon-translate: 0;
   --link-icon-opacity: 1;
 }
 
-.movie-container {
+.movie-list__row {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 300px));
-  grid-template-rows: 600px;
+  grid-template-rows: 500px;
   grid-auto-flow: column;
   gap: 24px;
   margin-inline: auto;
@@ -132,16 +132,17 @@ const filteredMovies = computed(() => {
   margin-bottom: calc(-.25 * var(--gutter));
 }
 
-.movie-wrapper{
+.movie-list__wrapper{
+  margin-top: 30px;
   width: 1000vw;
 }
 
 @media screen and (max-width: 960px) {
-  .movie-element {
+  .movie-list__element {
     container: card/inline-size;
   }
-  
-  .movie-container {
+
+  .movie-list__row {
     grid-template-rows: auto;
   }
 
@@ -161,13 +162,13 @@ const filteredMovies = computed(() => {
     padding-left: 0;
   }
 
-  .movie-card__figure {
+  .movie-list__card-figure {
     width: 100%;
     height: 100%;
     overflow: hidden;
   }
 
-  .movie-card__figure img {
+  .movie-list__card-figure img {
     height: 100%;
     aspect-ratio: 1;
     object-fit: cover;

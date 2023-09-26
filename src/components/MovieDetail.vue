@@ -1,5 +1,7 @@
 <template>
-  <div class="container">
+  <div class="movie-details__container container">
+    <div class="row">
+      <div class="eight columns">
     <h2>Movie Details</h2>
     <div v-if="fetch.load" class="loading-message">
       Loading data..
@@ -15,9 +17,11 @@
       </div>
     </div>
     <div>
-      <a @click="$router.go(-1)">
+      <a @click="$router.go(-1)" class="button">
         Back
       </a>
+    </div>
+    </div>
     </div>
   </div>
 </template>
@@ -37,8 +41,9 @@ const fetch = reactive(useFetch(`shows/${movieId.value}`));
 </script>
 
 <style scoped>
-.container{
+.movie-details__container{
   padding: 10px;
   margin: 10px;
+  margin: 0 auto;
 }
 </style>
