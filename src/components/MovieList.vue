@@ -1,27 +1,31 @@
 <template>
   <div class="movie-list__wrapper" v-if="filteredMovies.length>0">
   <h4>{{ selectedGenres }}</h4>
-  <section class="movie-list__row">
-    <article class="movie-list__element"
+  <section class="movie-list__row no-scrollbar">
+    <article class="movie-list__element "
              v-for="movie in filteredMovies"
              :key="movie.id">
       <div class="movie-list__card__wrapper article-wrapper">
         <figure class="movie-list__card-figure">
             <img :src="movie.image.original" :alt="movie.name" class="movie-list__card__image">
         </figure>
-        <div class="movie-list__card__content article-body">
-          <h2 class="movie-list__card__heading">
-            {{ movie.name }}
-          </h2>
-          <p v-html="movie.abstract" class="movie-list__card__description"></p>
-          <a :href="'/movie/'+movie.id" class="read-more">
-            Read more <span class="sr-only">about this</span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd"
-                    d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                    clip-rule="evenodd"/>
-            </svg>
-          </a>
+        <div class="movie-list__card__content">
+          <div class="movie-list__card__heading movie-list__info">
+            <h4>
+              {{ movie.name }}
+            </h4>
+          </div>
+          <div v-html="movie.abstract" class="movie-list__card__description movie-list__info"></div>
+          <div class="movie-list__cta button button-primary movie-list__info">
+            <a :href="'/movie/'+movie.id" class="read-more">
+              Read more <span class="sr-only">about this</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd"
+                      d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                      clip-rule="evenodd"/>
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
     </article>
@@ -54,8 +58,8 @@ const filteredMovies = computed(() => {
 .movie-list__element {
   --img-scale: 1.001;
   --title-color: black;
-  --link-icon-translate: -20px;
-  --link-icon-opacity: 0;
+  --link-icon-translate: 40px;
+  --link-icon-opacity: 1;
   position: relative;
   border-radius: 16px;
   box-shadow: none;
@@ -66,10 +70,6 @@ const filteredMovies = computed(() => {
 }
 
 .movie-list__element h2 {
-  margin: 0 0 18px 0;
-  font-size: 1.9rem;
-  letter-spacing: 0.06em;
-  color: var(--title-color);
   transition: color 0.3s ease-out;
 }
 
@@ -87,7 +87,7 @@ const filteredMovies = computed(() => {
   transition: transform 0.4s ease-in-out;
 }
 
-.article-body {
+.movie-list__card__content {
   padding: 24px;
 }
 
@@ -95,11 +95,9 @@ const filteredMovies = computed(() => {
   display: inline-flex;
   align-items: center;
   text-decoration: none;
-  color: #28666e;
 }
 
 .movie-list__element a:focus {
-  outline: 1px dotted #28666e;
 }
 
 .movie-list__element a .icon {
@@ -114,7 +112,6 @@ const filteredMovies = computed(() => {
 
 .movie-list__element:has(:hover, :focus) {
   --img-scale: 1.1;
-  --title-color: #28666e;
   --link-icon-translate: 0;
   --link-icon-opacity: 1;
 }
@@ -137,6 +134,18 @@ const filteredMovies = computed(() => {
   width: 1000vw;
 }
 
+.movie-list__card__description{
+}
+
+.movie-list__card__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.movie-list__info{
+}
+
 @media screen and (max-width: 960px) {
   .movie-list__element {
     container: card/inline-size;
@@ -146,7 +155,7 @@ const filteredMovies = computed(() => {
     grid-template-rows: auto;
   }
 
-  .article-body p {
+  .movie-list__card__content p {
     display: none;
   }
 }
@@ -158,7 +167,7 @@ const filteredMovies = computed(() => {
     gap: 16px;
   }
 
-  .article-body {
+  .movie-list__card__content {
     padding-left: 0;
   }
 
@@ -176,6 +185,10 @@ const filteredMovies = computed(() => {
   
 }
 
+.read-more{
+  color: #fff
+}
+
 .sr-only:not(:focus):not(:active) {
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
@@ -184,6 +197,15 @@ const filteredMovies = computed(() => {
   position: absolute;
   white-space: nowrap;
   width: 1px;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 </style>

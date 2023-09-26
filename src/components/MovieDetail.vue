@@ -1,6 +1,6 @@
 <template>
   <div class="movie-details__container container">    
-    <h1>Movie details</h1>
+    <h1>FilmFinder</h1>
     <div v-if="fetch.load" class="loading-message">
       Loading data..
     </div>
@@ -17,14 +17,14 @@
           <div class="movie-details__text">
             <div class="movie-details__info">Year: {{ movie.year }}</div>
             <div class="movie-details__info">Rating: {{ movie.rating.average ?? 'unknow' }}</div>
-            <div class="movie-details__info">
+            <div class="movie-details__info movie-details__button">
               <a :href="movie.url" target="_blank" class="button">
                 Website
               </a>
             </div>
           </div>
         </div>
-        <p v-html="movie.summary" />
+        <div v-html="movie.summary" class="movie-details__summary" />
       </div>
     </div>
     <div>
@@ -58,6 +58,13 @@ const movie = computed(() => {
 .movie-details__container{
   margin: 10vh auto 0 auto;
   max-width: 400px;
+  position: relative;
+  border-radius: 16px;
+  background: #fff;
+  transform-origin: center;
+  transition: all 0.4s ease-in-out;
+  overflow: hidden;
+  padding: 24px;
 }
 .movie-details__figure{
   display: flex;
@@ -65,7 +72,13 @@ const movie = computed(() => {
   gap: 30px;
 }
 .movie-details__info{
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
+}
+.movie-details__summary{
+  margin-top: 2.5rem;
+}
+.movie-details__button{
+  margin-top: 1rem;
 }
 
 
