@@ -5,7 +5,7 @@
     <article class="movie-list__element "
              v-for="movie in filteredMovies"
              :key="movie.id">
-      <div class="movie-list__card__wrapper article-wrapper">
+      <div class="movie-list__card__wrapper">
         <figure class="movie-list__card-figure">
             <img :src="movie.image.original" :alt="movie.name" class="movie-list__card__image">
         </figure>
@@ -138,9 +138,8 @@ const filteredMovies = computed(() => {
 }
 
 .movie-list__card__content {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  display: grid;
+  grid-template-rows: [title] 50px [content] 200px [cta] 50px;
 }
 
 .movie-list__info{
@@ -155,13 +154,18 @@ const filteredMovies = computed(() => {
     grid-template-rows: auto;
   }
 
-  .movie-list__card__content p {
+  .movie-list__card__description {
     display: none;
+  }
+
+  .movie-list__card__content {
+    display: grid;
+    grid-template-rows: [title] 50px [content] 0px [cta] 50px;
   }
 }
 
 @container card (min-width: 380px) {
-  .article-wrapper {
+  .movie-list__card__wrapper {
     display: grid;
     grid-template-columns: 100px 1fr;
     gap: 16px;
