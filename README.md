@@ -1,31 +1,30 @@
 # MovieFinder
 
-This project is an exploration for vue3. 
+**MovieFinder** is a web application designed to search for movies on the web. It serves as a hands-on exploration into the Vue 3 framework.
 
-This project required 4 days for learning vue3 with the use of official documentation and the help of AI for learning.
+The development journey involved four days of Vue 3 learning, utilizing the official documentation and AI assistance.
 
-## Requirement
-use the latest npm (8.19) or yarn (1.22)
+## Requirements
+- Use npm version 8.19 or yarn version 1.22.
 
-## How to run
-from the project root, open a terminal
-- `yarn install` or `npm install`
-- `yarn dev` or `npm run dev`
-- open the url in the terminal in your browser
+## How to Run
+1. Navigate to the project root in your terminal.
+2. Run `yarn install` or `npm install`.
+3. Start the development server with `yarn dev` or `npm run dev`.
+4. Open the displayed URL in your browser.
 
-# Architectural choice
-- Vue 3 has been used as the latest version, with composition API to reduce complexity
-- Every component has his how file, for code splitting.
-- vue-router has been used has official library for routing 
-- There are only 2 routes, one for the home page and one to show a movie details.
-- I did some research for state manager and I look at pinia for the most promising candidate. 
-- However, I did not use any state manager because the app is very simple
-- Composable has been used to simplify some repetitive code
-- Node has not been used, the app is quite simple to run using only yarn dev
-- To help with style I use barebone style template called skeletron 
-- A search has been added, and also a genre selector to filter the content
-- TV maze is the API BE
+## Architectural Choices
+- Leveraged **Vue 3**, the latest version, utilizing its composition API to streamline complexity.
+- Each component is isolated in its own file to facilitate code splitting.
+- Employed `vue-router` as the primary library for routing.
+- The app features two routes: a homepage and a movie details page.
+- While pinia emerged as a potential state manager during research, no state manager was used due to the app's simplicity.
+- Utilized Composables to reduce redundancy in code.
+- The app doesn't rely on Node; it can be easily run with just `yarn dev`.
+- Incorporated a minimalist style template, **skeletron**, to enhance aesthetics.
+- Features include a search function and a genre selector for content filtering.
+- **TV Maze** serves as the backend API.
 
-# Next improvements
-- crete a version with pinia
-- create a docker version
+## Upcoming Enhancements
+- Introduce a version integrated with pinia.
+- Roll out a Docker-supported version.
