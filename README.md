@@ -28,3 +28,4 @@ The development journey involved four days of Vue 3 learning, utilizing the offi
 ## Upcoming Enhancements
 - Introduce a version integrated with pinia.
 - Roll out a Docker-supported version.
+- Add an BE API call on the search bar 
