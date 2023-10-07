@@ -1,13 +1,14 @@
 <template>
-  <div class="movie-list__wrapper" v-if="filteredMovies.length>0">
-  <h4>{{ selectedGenres }}</h4>
+  <div class="movie-list__wrapper" v-if="movies && movies.length>0">
+  <h4>{{ selectedGenres ?? title  }}</h4>
   <section class="movie-list__row no-scrollbar">
     <article class="movie-list__element "
              v-for="movie in filteredMovies"
              :key="movie.id">
       <div class="movie-list__card__wrapper">
         <figure class="movie-list__card-figure">
-            <img :src="movie.image.original" :alt="movie.name" class="movie-list__card__image">
+            <img v-if="movie.image?.original" :src="movie.image.original" :alt="movie.name" class="movie-list__card__image">
+            <img v-else-if="movie.image?.medium" :src="movie.image.medium" :alt="movie.name" class="movie-list__card__image">
         </figure>
         <div class="movie-list__card__content">
           <div class="movie-list__card__heading movie-list__info">
@@ -15,7 +16,9 @@
               {{ movie.name }}
             </h4>
           </div>
-          <div v-html="movie.abstract" class="movie-list__card__description movie-list__info"></div>
+          <div v-if="movie.summary">
+            <div v-html="`${movie.summary.substring(0, 160)}...`" class="movie-list__card__description movie-list__info"></div>
+          </div>
           <div class="movie-list__cta button button-primary movie-list__info">
             <a :href="'/movie/'+movie.id" class="read-more">
               Read more <span class="sr-only">about this</span>
@@ -38,15 +41,15 @@ import {computed, defineProps} from 'vue';
 
 const props = defineProps({
   selectedGenres: String,
+  title: String,
   movies: Array,
 });
 
 const filteredMovies = computed(() => {
-  return props.selectedGenres.length === 0
-      ? props.movies
-      : props.movies.filter((movie) =>
-          movie.genres.includes(props.selectedGenres)
-      );
+  return props.selectedGenres && props.selectedGenres.length > 0
+      ? (props.movies.filter((movie) =>
+          movie.genres.includes(props.selectedGenres)))
+      : (props.movies)
   });
 </script>
 

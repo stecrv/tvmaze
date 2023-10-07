@@ -1,9 +1,8 @@
- export const dataEnricher = data => {
-    return data.map(el => {
-        return {...el, abstract: el.summary.substring(0, 160) + "..."}});
- }
-
  export const dataMovieEnricher = movie =>{
         const year = movie?.premiered?.split('-') ?? ['none'];
         return {...movie, year: year[0]}
+ }
+
+ export const searchDataConvert = data => {
+     return data ? data.map(el => {return el.show}) : [];
  }
