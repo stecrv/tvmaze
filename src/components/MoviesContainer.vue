@@ -2,8 +2,8 @@
 <template>
   <div class="container-list">
     <h1>MovieFinder</h1>
-    <div v-if="fetchMostWatched.load || fetchSearch.load">
-      Loading data..
+    <div v-if="fetchMostWatched.load">
+      Loading data...
     </div>
     <div v-else-if="fetchMostWatched.error || fetchSearch.error">
       Sorry, the app is not working, reload the page
